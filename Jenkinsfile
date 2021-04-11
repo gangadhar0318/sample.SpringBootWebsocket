@@ -3,17 +3,16 @@ pipeline {
         label 'dev'
     }
     tools {
-        maven ''
+        maven 'Maven363'
     }
-    options{
-
+    options { 
+        buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '5', numToKeepStr: '5')
     }
     stages {
         stage('Build') {
-
-        }
-        stage('Deploy') {
-            
+            steps {
+                sh "mvn clean install"
+            }
         }
     }
 }
